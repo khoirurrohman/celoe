@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'class_progress_screen.dart'; // Import the class progress screen
+import 'profile_screen.dart'; // Import the profile screen
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -12,6 +13,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF8B0000), // Dark red
+        foregroundColor: Colors.white,
+        title: const Text(
+          'Dashboard',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              // Navigate to profile screen
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: Column(
         children: [
           // Header Profile Section
@@ -82,14 +103,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                       ),
                       const SizedBox(width: 10),
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          shape: BoxShape.circle,
+                      GestureDetector(
+                        onTap: () {
+                          // Navigate to profile screen when profile icon is tapped
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const ProfileScreen(),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(Icons.person, color: Colors.grey),
                         ),
-                        child: const Icon(Icons.person, color: Colors.grey),
                       ),
                     ],
                   ),

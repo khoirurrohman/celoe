@@ -120,10 +120,20 @@ class _MyClassesScreenState extends State<MyClassesScreen> {
   }
 
   Widget _buildClassesTab() {
+    // Course names as requested
+    List<String> courseNames = [
+      'Sistem Cerdas',
+      'Seminar Tugas Akhir',
+      'Pengaman Sistem Cyber',
+      'Mobile Programming Lanjut',
+      'Aplikasi Sistem Informasi Geografis',
+      'Kuliah Kerja Nyata',
+    ];
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
-        itemCount: 5, // Number of classes
+        itemCount: courseNames.length, // Number of classes
         itemBuilder: (context, index) {
           return Card(
             margin: const EdgeInsets.only(bottom: 12, left: 8, right: 8),
@@ -153,7 +163,7 @@ class _MyClassesScreenState extends State<MyClassesScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Mata Kuliah ${index + 1}',
+                          courseNames[index],
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

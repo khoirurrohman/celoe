@@ -120,6 +120,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           decoration: BoxDecoration(
                             color: Colors.grey[300],
                             shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 2),
                           ),
                           child: const Icon(Icons.person, color: Colors.grey),
                         ),
@@ -154,10 +155,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
-                      height: 120,
+                      height: 140,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF8B0000), // Dark red
+                        color: const Color(0xFFC2272D), // Solid red
                         borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -166,19 +175,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Desain Antarmuka',
+                              'DESAIN ANTARMUKA & PENGALAMAN PENGGUNA',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 18,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Tugas 3 - Prototype Interaktif\nKamis, 16 Mei 2024 - 23:59',
+                              'Tugas 01 - UID Android Mobile Game',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              'Waktu Pengumpulan: Jumat, 26 Februari, 23:59 WIB',
                               style: TextStyle(
                                 color: Colors.white70,
-                                fontSize: 14,
+                                fontSize: 12,
                               ),
                             ),
                           ],
@@ -223,8 +240,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: Container(
                       height: 120,
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
                       ),
                       child: const Center(
                         child: Text(
@@ -292,32 +317,82 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           child: Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
+                              color: Colors.white,
                               border: Border.all(color: Colors.grey[300]!),
                               borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 3,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
                             ),
                             child: Row(
                               children: [
                                 Container(
-                                  width: 40,
-                                  height: 40,
+                                  width: 50,
+                                  height: 50,
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF8B0000), // Dark red
+                                    color: index == 0
+                                        ? Colors.orange
+                                        : index == 1
+                                        ? Colors.blue
+                                        : Colors.green,
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: const Icon(
                                     Icons.book,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 24,
                                   ),
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
-                                  child: Text(
-                                    'UI/UX Design ${index + 1}',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.grey[700],
-                                    ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '2021/${index + 2}',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey[600],
+                                        ),
+                                      ),
+                                      Text(
+                                        'UI/UX Design ${index + 1} - Advanced Techniques',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.grey[800],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 6),
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(4),
+                                        child: LinearProgressIndicator(
+                                          value: 0.8 + (index * 0.05),
+                                          backgroundColor: Colors.grey[300],
+                                          valueColor:
+                                              const AlwaysStoppedAnimation<
+                                                Color
+                                              >(
+                                                Color(0xFF8B0000), // Dark red
+                                              ),
+                                          minHeight: 4,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        '${(80 + (index * 5))}% Selesai',
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          color: Colors.grey[600],
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -346,7 +421,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildBottomNavItem(Icons.home, 'Home'),
+              _buildBottomNavItem(Icons.home, 'Home', true), // Active
               GestureDetector(
                 onTap: () {
                   // Navigate to my classes screen
@@ -356,7 +431,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   );
                 },
-                child: _buildBottomNavItem(Icons.book, 'Kelas Saya'),
+                child: _buildBottomNavItem(Icons.book, 'Kelas Saya', false),
               ),
               GestureDetector(
                 onTap: () {
@@ -367,7 +442,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   );
                 },
-                child: _buildBottomNavItem(Icons.notifications, 'Notifikasi'),
+                child: _buildBottomNavItem(
+                  Icons.notifications,
+                  'Notifikasi',
+                  false,
+                ),
               ),
             ],
           ),
@@ -376,18 +455,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildBottomNavItem(IconData icon, String label) {
+  Widget _buildBottomNavItem(IconData icon, String label, bool isActive) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, color: Colors.white, size: 24),
+        Icon(
+          icon,
+          color: isActive ? Colors.white : Colors.white70, // Active state
+          size: isActive ? 28 : 24, // Active state
+        ),
         const SizedBox(height: 4),
         Text(
           label,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: isActive ? Colors.white : Colors.white70, // Active state
             fontSize: 12,
-            fontWeight: FontWeight.w500,
+            fontWeight: isActive
+                ? FontWeight.bold
+                : FontWeight.w500, // Active state
           ),
         ),
       ],

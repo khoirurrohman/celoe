@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'class_progress_screen.dart'; // Import the class progress screen
 import 'profile_screen.dart'; // Import the profile screen
 import 'my_classes_screen.dart'; // Import the my classes screen
+import 'notifications_screen.dart'; // Import the notifications screen
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -357,7 +358,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 },
                 child: _buildBottomNavItem(Icons.book, 'Kelas Saya'),
               ),
-              _buildBottomNavItem(Icons.notifications, 'Notifikasi'),
+              GestureDetector(
+                onTap: () {
+                  // Navigate to notifications screen
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const NotificationsScreen(),
+                    ),
+                  );
+                },
+                child: _buildBottomNavItem(Icons.notifications, 'Notifikasi'),
+              ),
             ],
           ),
         ),

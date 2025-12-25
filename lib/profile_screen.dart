@@ -23,7 +23,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           centerTitle: true,
         ),
         body: Container(
-          color: Colors.grey[100], // Light grey background
+          color: Colors.grey[100]!.withValues(
+            alpha: 1.0,
+          ), // Light grey background
           child: Column(
             children: [
               // Profile Header Section
@@ -45,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white, width: 3),
                           ),
@@ -122,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
+                      color: Colors.grey.withValues(alpha: 0.1),
                       spreadRadius: 1,
                       blurRadius: 5,
                       offset: const Offset(0, 2),
@@ -155,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
+                        color: Colors.grey.withValues(alpha: 0.1),
                         spreadRadius: 1,
                         blurRadius: 5,
                         offset: const Offset(0, 2),
@@ -232,7 +234,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               'Saya adalah seorang mahasiswa Teknik Informatika di Telkom University. Saya tertarik dengan pengembangan aplikasi mobile dan web, serta memiliki pengalaman dalam beberapa proyek pengembangan perangkat lunak.',
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey[700],
+                color: Colors.grey[700]!.withValues(alpha: 1.0),
                 height: 1.5,
               ),
             ),
@@ -320,7 +322,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 'Semester ${index + 3}',
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: Colors.grey[600],
+                                  color: Colors.grey[600]!.withValues(
+                                    alpha: 1.0,
+                                  ),
                                 ),
                               ),
                             ],
@@ -332,13 +336,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.green[100],
+                            color: Colors.green[100]!.withValues(alpha: 1.0),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
                             'Aktif',
                             style: TextStyle(
-                              color: Colors.green[700],
+                              color: Colors.green[700]!.withValues(alpha: 1.0),
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                             ),
@@ -380,7 +384,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     width: 100,
                     height: 100,
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.grey[300]!.withValues(alpha: 1.0),
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(

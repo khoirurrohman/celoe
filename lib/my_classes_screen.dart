@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'sistem_cerdas_screen.dart'; // Import the sistem cerdas screen
 
 class MyClassesScreen extends StatefulWidget {
   const MyClassesScreen({super.key});
@@ -23,7 +24,9 @@ class _MyClassesScreenState extends State<MyClassesScreen> {
           centerTitle: true,
         ),
         body: Container(
-          color: Colors.grey[100], // Light grey background
+          color: Colors.grey[100]!.withValues(
+            alpha: 1.0,
+          ), // Light grey background
           child: Column(
             children: [
               // Search Bar
@@ -35,7 +38,7 @@ class _MyClassesScreenState extends State<MyClassesScreen> {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
+                      color: Colors.grey.withValues(alpha: 0.1),
                       spreadRadius: 1,
                       blurRadius: 5,
                       offset: const Offset(0, 2),
@@ -60,7 +63,7 @@ class _MyClassesScreenState extends State<MyClassesScreen> {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
+                      color: Colors.grey.withValues(alpha: 0.1),
                       spreadRadius: 1,
                       blurRadius: 5,
                       offset: const Offset(0, 2),
@@ -93,7 +96,7 @@ class _MyClassesScreenState extends State<MyClassesScreen> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
+                        color: Colors.grey.withValues(alpha: 0.1),
                         spreadRadius: 1,
                         blurRadius: 5,
                         offset: const Offset(0, 2),
@@ -139,75 +142,90 @@ class _MyClassesScreenState extends State<MyClassesScreen> {
             margin: const EdgeInsets.only(bottom: 12, left: 8, right: 8),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Row(
-                children: [
-                  // Class Image
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(8),
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
-                        ), // Placeholder for class image
-                        fit: BoxFit.cover,
+              child: GestureDetector(
+                onTap: () {
+                  // Navigate to specific screen for Sistem Cerdas
+                  if (index == 0) {
+                    // Sistem Cerdas is at index 0
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SistemCerdasScreen(),
+                      ),
+                    );
+                  }
+                },
+                child: Row(
+                  children: [
+                    // Class Image
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300]!.withValues(alpha: 1.0),
+                        borderRadius: BorderRadius.circular(8),
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            'https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
+                          ), // Placeholder for class image
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 12),
-                  // Class Info
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          courseNames[index],
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'Semester ${index + 3}',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        // Progress bar
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: LinearProgressIndicator(
-                            value: 0.6 + (index * 0.1),
-                            backgroundColor: Colors.grey[300],
-                            valueColor: const AlwaysStoppedAnimation<Color>(
-                              Color(0xFF8B0000), // Dark red
+                    const SizedBox(width: 12),
+                    // Class Info
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            courseNames[index],
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
-                            minHeight: 6,
                           ),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          '${(60 + (index * 10))}% Selesai',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.grey[600],
+                          const SizedBox(height: 4),
+                          Text(
+                            'Semester 7',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[600]!.withValues(alpha: 1.0),
+                            ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 8),
+                          // Progress bar
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(4),
+                            child: LinearProgressIndicator(
+                              value: 0.6 + (index * 0.1),
+                              backgroundColor: Colors.grey[300]!.withValues(
+                                alpha: 1.0,
+                              ),
+                              valueColor: const AlwaysStoppedAnimation<Color>(
+                                Color(0xFF8B0000), // Dark red
+                              ),
+                              minHeight: 6,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            '${(60 + (index * 10))}% Selesai',
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.grey[600]!.withValues(alpha: 1.0),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  // Arrow icon
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 16,
-                    color: Colors.grey,
-                  ),
-                ],
+                    // Arrow icon
+                    const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
               ),
             ),
           );

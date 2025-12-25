@@ -118,7 +118,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           width: 40,
                           height: 40,
                           decoration: BoxDecoration(
-                            color: Colors.grey[300],
+                            color: Colors.grey[300]!.withValues(alpha: 1.0),
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white, width: 2),
                           ),
@@ -146,7 +146,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
+                        color: Colors.grey[800]!.withValues(alpha: 1.0),
                       ),
                     ),
                   ),
@@ -161,7 +161,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey.withValues(alpha: 0.3),
                             spreadRadius: 1,
                             blurRadius: 5,
                             offset: const Offset(0, 3),
@@ -194,7 +194,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Text(
                               'Waktu Pengumpulan: Jumat, 26 Februari, 23:59 WIB',
                               style: TextStyle(
-                                color: Colors.white70,
+                                color: Colors.white.withValues(alpha: 0.7),
                                 fontSize: 12,
                               ),
                             ),
@@ -217,7 +217,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey[800],
+                            color: Colors.grey[800]!.withValues(alpha: 1.0),
                           ),
                         ),
                         Text(
@@ -240,11 +240,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     child: Container(
                       height: 120,
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
+                        color: Colors.grey[300]!.withValues(alpha: 1.0),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
+                            color: Colors.grey.withValues(alpha: 0.3),
                             spreadRadius: 1,
                             blurRadius: 5,
                             offset: const Offset(0, 3),
@@ -276,7 +276,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey[800],
+                            color: Colors.grey[800]!.withValues(alpha: 1.0),
                           ),
                         ),
                         Text(
@@ -322,7 +322,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
+                                  color: Colors.grey.withValues(alpha: 0.2),
                                   spreadRadius: 1,
                                   blurRadius: 3,
                                   offset: const Offset(0, 2),
@@ -358,7 +358,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         '2021/${index + 2}',
                                         style: TextStyle(
                                           fontSize: 12,
-                                          color: Colors.grey[600],
+                                          color: Colors.grey[600]!.withValues(
+                                            alpha: 1.0,
+                                          ),
                                         ),
                                       ),
                                       Text(
@@ -366,7 +368,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.grey[800],
+                                          color: Colors.grey[800]!.withValues(
+                                            alpha: 1.0,
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(height: 6),
@@ -374,7 +378,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         borderRadius: BorderRadius.circular(4),
                                         child: LinearProgressIndicator(
                                           value: 0.8 + (index * 0.05),
-                                          backgroundColor: Colors.grey[300],
+                                          backgroundColor: Colors.grey[300]!
+                                              .withValues(alpha: 1.0),
                                           valueColor:
                                               const AlwaysStoppedAnimation<
                                                 Color
@@ -389,7 +394,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         '${(80 + (index * 5))}% Selesai',
                                         style: TextStyle(
                                           fontSize: 11,
-                                          color: Colors.grey[600],
+                                          color: Colors.grey[600]!.withValues(
+                                            alpha: 1.0,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -461,14 +468,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
       children: [
         Icon(
           icon,
-          color: isActive ? Colors.white : Colors.white70, // Active state
+          color: isActive
+              ? Colors.white
+              : Colors.white.withValues(alpha: 0.7), // Active state
           size: isActive ? 28 : 24, // Active state
         ),
         const SizedBox(height: 4),
         Text(
           label,
           style: TextStyle(
-            color: isActive ? Colors.white : Colors.white70, // Active state
+            color: isActive
+                ? Colors.white
+                : Colors.white.withValues(alpha: 0.7), // Active state
             fontSize: 12,
             fontWeight: isActive
                 ? FontWeight.bold

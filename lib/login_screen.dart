@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dashboard_screen.dart'; // Import the dashboard screen
 
 class LoginScreen extends StatefulWidget {
@@ -29,448 +30,249 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Header Section with UIM campus image and logo
-            Container(
-              height:
-                  MediaQuery.of(context).size.height * 0.4, // Responsive height
-              child: Stack(
-                children: [
-                  // UIM campus image with diagonal bottom edge
-                  ClipPath(
-                    clipper: DiagonalClipper(),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color(
-                          0xFF8B0000,
-                        ), // Dark red background as placeholder
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                            'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80',
-                          ), // University campus image
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                  // Centered circular logo overlay
-                  Center(
-                    child: Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 3),
-                      ),
-                      child: Icon(Icons.school, size: 60, color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Main Content Section
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 30.0,
-                vertical: 40.0,
-              ),
-              decoration: const BoxDecoration(color: Colors.white),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // Login title
-                  Text(
-                    'Login',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                  const SizedBox(height: 40),
-
-                  // Email input field
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Email',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: Colors.grey[300]!,
-                              width: 1.0,
-                            ),
-                          ),
-                        ),
-                        child: TextField(
-                          controller: _emailController,
-                          decoration: InputDecoration(
-                            hintText: 'Email 365',
-                            hintStyle: TextStyle(color: Colors.grey[400]),
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 12.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 25),
-
-                  // Password input field
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Password',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(
-                              color: Colors.grey[300]!,
-                              width: 1.0,
-                            ),
-                          ),
-                        ),
-                        child: TextField(
-                          controller: _passwordController,
-                          obscureText: !_passwordVisible,
-                          decoration: InputDecoration(
-                            hintText: 'Password',
-                            hintStyle: TextStyle(color: Colors.grey[400]),
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 12.0,
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
-                                color: Colors.grey[600],
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 50),
-
-                  // Login button
-                  SizedBox(
-                    height: 55,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Navigate to dashboard after login
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => const DashboardScreen(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF8B0000), // Dark red
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                      ),
-                      child: const Text(
-                        'Log In',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  // Help button below the login button
-                  SizedBox(
-                    height: 55,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        _showHelpModal(context);
-                      },
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(
-                          color: const Color(0xFF8B0000), // Dark red border
-                          width: 2.0,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                      ),
-                      child: Text(
-                        'Bantuan',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: const Color(0xFF8B0000), // Dark red text
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Enhanced Footer Section with prominent wave design
-            Container(
-              height: 60,
-              decoration: const BoxDecoration(
-                color: Color(0xFF8B0000), // Dark red
-              ),
-              child: ClipPath(
-                clipper: WaveClipper(),
-                child: Container(
-                  color: const Color(0xFF8B0000), // Dark red
-                  height: 60,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Method to show the help modal
-  void _showHelpModal(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return HelpModal();
-      },
-    );
-  }
-}
-
-// Help Modal Component
-class HelpModal extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      child: Container(
-        padding: const EdgeInsets.all(24.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        width: MediaQuery.of(context).size.width * 0.8,
+      body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Language Selection Header
-              Container(
-                margin: const EdgeInsets.only(bottom: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Indonesian Flag Button
-                    Expanded(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: MediaQuery.of(context).size.height,
+            ),
+            child: IntrinsicHeight(
+              child: Column(
+                children: [
+                  // Header with university building image
+                  Stack(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              'https://www.telkomuniversity.ac.id/wp-content/uploads/2020/01/kampus-international-business-school-telkom-university.jpg',
+                            ),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      // Diagonal cut at the bottom of the header
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: ClipPath(
+                          clipper: DiagonalClipper(),
+                          child: Container(
+                            height: 60,
+                            color: Colors.transparent,
+                          ),
+                        ),
+                      ),
+                      // Red circular logo with white 'T' floating at the boundary
+                      Positioned(
+                        bottom: -40,
+                        left: MediaQuery.of(context).size.width / 2 - 40,
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: const BoxDecoration(
+                            color: Color(
+                              0xFFb91c1c,
+                            ), // Red maroon color as specified
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 10,
+                                offset: Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'T',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // White body with login form
+                  Container(
+                    margin: const EdgeInsets.only(top: 40),
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(30.0),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
+                          const SizedBox(
+                            height: 50,
+                          ), // Space for the floating logo
+                          // Login title with large bold text
+                          Text(
+                            'Login',
+                            style: GoogleFonts.inter(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[800],
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+
+                          const SizedBox(height: 30),
+
+                          // Email input field with underlined style
                           Container(
-                            padding: const EdgeInsets.all(4.0),
                             decoration: BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(
-                                  color: const Color(0xFF8B0000), // Dark red
-                                  width: 2.0,
+                                  color: const Color(
+                                    0xFFb91c1c,
+                                  ), // Red maroon underline
+                                  width: 2,
                                 ),
                               ),
                             ),
-                            child: const Text(
-                              '🇮🇩',
-                              style: TextStyle(fontSize: 24),
+                            child: TextField(
+                              controller: _emailController,
+                              decoration: const InputDecoration(
+                                labelText: 'Email 365',
+                                labelStyle: TextStyle(
+                                  color: Color(0xFFb91c1c), // Red maroon label
+                                  fontSize: 16,
+                                ),
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.zero,
+                              ),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.black87,
+                              ),
                             ),
                           ),
-                          const SizedBox(height: 4),
-                          const Text(
-                            'ID',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 30),
-                    // English Flag Button
-                    Expanded(
-                      child: Column(
-                        children: [
+
+                          const SizedBox(height: 20),
+
+                          // Password input field with underlined style
                           Container(
-                            padding: const EdgeInsets.all(4.0),
-                            child: const Text(
-                              '🇬🇧',
-                              style: TextStyle(fontSize: 24),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: const Color(
+                                    0xFFb91c1c,
+                                  ), // Red maroon underline
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                            child: TextField(
+                              controller: _passwordController,
+                              obscureText: !_passwordVisible,
+                              decoration: InputDecoration(
+                                labelText: 'Password',
+                                labelStyle: const TextStyle(
+                                  color: Color(0xFFb91c1c), // Red maroon label
+                                  fontSize: 16,
+                                ),
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.zero,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _passwordVisible
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: const Color(
+                                      0xFFb91c1c,
+                                    ), // Red maroon eye icon
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _passwordVisible = !_passwordVisible;
+                                    });
+                                  },
+                                ),
+                              ),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.black87,
+                              ),
                             ),
                           ),
-                          const SizedBox(height: 4),
-                          const Text(
-                            'EN',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+
+                          const SizedBox(height: 40),
+
+                          // Login button with maroon color and pill shape
+                          Container(
+                            width: double.infinity,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: const Color(
+                                0xFFb91c1c,
+                              ), // Red maroon color
+                              borderRadius: BorderRadius.circular(
+                                25,
+                              ), // Pill-shaped
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: TextButton(
+                              onPressed: () {
+                                // Navigate to dashboard screen
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const DashboardScreen(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                'Log In',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Content Text
-              Container(
-                margin: const EdgeInsets.only(bottom: 20.0),
-                child: Column(
-                  children: [
-                    // Paragraph 1
-                    Text(
-                      'Akses ini hanya diperuntukkan bagi Dosen dan Mahasiswa Telkom University menggunakan Akun Microsoft Office 365.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[700],
-                        height: 1.5,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-
-                    // Paragraph 2 (Account Instructions)
-                    Text(
-                      'Username: (Akun iGracias) + @365.telkomuniversity.ac.id\nPassword: Menggunakan password iGracias',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[700],
-                        height: 1.5,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-
-                    // Paragraph 3 (Troubleshooting)
-                    Text(
-                      'Kegagalan autentikasi biasanya disebabkan karena belum mengubah password menjadi "Strong Password" di iGracias.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[700],
-                        height: 1.5,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              // Contact Information Footer
-              Container(
-                margin: const EdgeInsets.only(top: 10.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'Informasi lebih lanjut dapat menghubungi Layanan CeLOE Helpdesk di:',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                    ),
-                    const SizedBox(height: 10),
-
-                    // Email Contact
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.email,
-                          size: 16,
-                          color: Color(0xFF8B0000), // Dark red
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Mail: info.celoe@telkomuniversity.ac.id',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-
-                    // WhatsApp Contact
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.phone,
-                          size: 16,
-                          color: Color(0xFF8B0000), // Dark red
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          'WhatsApp: +62 821-1966-8868',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-
-              // Close Button
-              Container(
-                margin: const EdgeInsets.only(top: 20.0),
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF8B0000), // Dark red
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text('Tutup'),
-                ),
+
+                  // Footer with red wave shape
+                  Container(
+                    height: 80,
+                    child: ClipPath(
+                      clipper: WaveClipper(),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFb91c1c), // Red maroon color
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -478,17 +280,13 @@ class HelpModal extends StatelessWidget {
   }
 }
 
-// Custom clipper for diagonal bottom edge
 class DiagonalClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
-    path.lineTo(
-      0,
-      size.height - 50,
-    ); // Start from top left, leave some space at bottom
-    path.lineTo(size.width, size.height); // Go to bottom right
-    path.lineTo(size.width, 0); // Go to top right
+    path.lineTo(0, size.height); // Start from top left to bottom
+    path.lineTo(size.width, size.height - 20); // Bottom right with diagonal cut
+    path.lineTo(size.width, 0); // Top right
     path.close();
     return path;
   }
@@ -497,15 +295,14 @@ class DiagonalClipper extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
 
-// Enhanced wave clipper for the footer
 class WaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final path = Path();
     path.lineTo(0, size.height); // Start from top left to bottom
 
-    final waveHeight = 15.0;
-    final waveLength = 40.0;
+    final waveHeight = 20.0; // Increased wave height for more visual impact
+    final waveLength = 50.0; // Increased wave length for smoother waves
     double yPos = 0;
 
     // Create multiple wave cycles across the width

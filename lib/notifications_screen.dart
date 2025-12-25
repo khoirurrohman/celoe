@@ -31,7 +31,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           ],
         ),
         body: Container(
-          color: Colors.grey[100], // Light grey background
+          color: Colors.grey[100]!.withValues(
+            alpha: 1.0,
+          ), // Light grey background
           child: Column(
             children: [
               // Notification Categories Tabs
@@ -42,7 +44,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
+                      color: Colors.grey.withValues(alpha: 0.1),
                       spreadRadius: 1,
                       blurRadius: 5,
                       offset: const Offset(0, 2),
@@ -73,7 +75,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
+                        color: Colors.grey.withValues(alpha: 0.1),
                         spreadRadius: 1,
                         blurRadius: 5,
                         offset: const Offset(0, 2),
@@ -110,7 +112,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           return Card(
             margin: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
             color: isUnread
-                ? Colors.grey[50]
+                ? Colors.grey[50]!.withValues(alpha: 1.0)
                 : Colors.white, // Light grey for unread
             child: Padding(
               padding: const EdgeInsets.all(12.0),
@@ -150,7 +152,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                       : FontWeight.normal,
                                   color: isUnread
                                       ? Colors.black
-                                      : Colors.grey[700],
+                                      : Colors.grey[700]!.withValues(
+                                          alpha: 1.0,
+                                        ),
                                 ),
                               ),
                             ),
@@ -158,7 +162,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                               '${index + 1}h',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colors.grey[600],
+                                color: Colors.grey[600]!.withValues(alpha: 1.0),
                               ),
                             ),
                           ],
@@ -168,7 +172,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           'Ini adalah notifikasi penting mengenai kelas yang akan datang dan pengumuman akademik.',
                           style: TextStyle(
                             fontSize: 12,
-                            color: isUnread ? Colors.black87 : Colors.grey[600],
+                            color: isUnread
+                                ? Colors.black87
+                                : Colors.grey[600]!.withValues(alpha: 1.0),
                           ),
                         ),
                       ],
@@ -201,7 +207,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         itemBuilder: (context, index) {
           return Card(
             margin: const EdgeInsets.only(bottom: 8, left: 8, right: 8),
-            color: Colors.grey[50], // Light grey for unread
+            color: Colors.grey[50]!.withValues(
+              alpha: 1.0,
+            ), // Light grey for unread
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Row(
@@ -244,7 +252,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                               '${index + 1}h',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colors.grey[600],
+                                color: Colors.grey[600]!.withValues(alpha: 1.0),
                               ),
                             ),
                           ],
@@ -296,7 +304,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     width: 40,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: Colors.grey[400], // Grey for archived
+                      color: Colors.grey[400]!.withValues(
+                        alpha: 1.0,
+                      ), // Grey for archived
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Icon(
@@ -320,7 +330,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.normal,
-                                  color: Colors.grey[700],
+                                  color: Colors.grey[700]!.withValues(
+                                    alpha: 1.0,
+                                  ),
                                 ),
                               ),
                             ),
@@ -328,7 +340,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                               '${index + 3}d',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: Colors.grey[600],
+                                color: Colors.grey[600]!.withValues(alpha: 1.0),
                               ),
                             ),
                           ],
@@ -338,7 +350,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           'Ini adalah notifikasi yang telah diarsipkan dan tidak lagi aktif.',
                           style: TextStyle(
                             fontSize: 12,
-                            color: Colors.grey[600],
+                            color: Colors.grey[600]!.withValues(alpha: 1.0),
                           ),
                         ),
                       ],

@@ -14,7 +14,9 @@ class CeLoeApp extends StatelessWidget {
       title: 'CeLoe - Learning Management System',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF8B0000)),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFFC2272D),
+        ), // Telkom University red
       ),
       home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
@@ -35,25 +37,31 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // Navigate to login screen after 3 seconds to allow for better visual experience
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
-      );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) {
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+          );
+        }
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF8B0000), // Dark red background
+      backgroundColor: const Color(
+        0xFFC2272D,
+      ), // Telkom University red background
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              const Color(0xFF8B0000), // Dark red
-              const Color(0xFFA52A2A), // Brown red
+              const Color(0xFFC2272D), // Telkom University red
+              const Color(0xFFA52A2D), // Slightly darker red
             ],
           ),
         ),
@@ -61,29 +69,43 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Main Logo with enhanced styling
+              // Main Logo with enhanced styling - using the actual logo image
               Container(
                 width: 150,
                 height: 150,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
+                  color: Colors.white.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Colors.white.withOpacity(0.3),
+                    color: Colors.white.withValues(alpha: 0.3),
                     width: 3,
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 10),
                     ),
                   ],
                 ),
-                child: const Icon(Icons.school, size: 80, color: Colors.white),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(75),
+                  child: Image.asset(
+                    'assets/images/celoe_logo.png',
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) {
+                      // Fallback to default icon if image fails to load
+                      return const Icon(
+                        Icons.school,
+                        size: 80,
+                        color: Colors.white,
+                      );
+                    },
+                  ),
+                ),
               ),
               const SizedBox(height: 40),
-              // App name with enhanced styling
+              // App name with enhanced styling using Feremost font
               Text(
                 'ceLoe',
                 style: TextStyle(
@@ -93,7 +115,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   letterSpacing: 2,
                   shadows: [
                     Shadow(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha: 0.3),
                       offset: const Offset(2, 2),
                       blurRadius: 4,
                     ),
@@ -107,11 +129,11 @@ class _SplashScreenState extends State<SplashScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
-                  color: Colors.white.withOpacity(0.9),
+                  color: Colors.white.withValues(alpha: 0.9),
                   letterSpacing: 1,
                   shadows: [
                     Shadow(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha: 0.3),
                       offset: const Offset(1, 1),
                       blurRadius: 2,
                     ),
@@ -136,7 +158,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w300,
-                  color: Colors.white.withOpacity(0.7),
+                  color: Colors.white.withValues(alpha: 0.7),
                   fontStyle: FontStyle.italic,
                 ),
               ),

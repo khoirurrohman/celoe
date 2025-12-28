@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'dashboard_screen.dart'; // Import the dashboard screen
+import 'dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,283 +9,267 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  bool _passwordVisible = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _passwordVisible = false;
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // --- HEADER DENGAN GAMBAR DAN LOGO ---
+            Stack(
+              alignment: Alignment.bottomCenter,
+              clipBehavior: Clip.none,
+              children: [
+                ClipPath(
+                  clipper: HeaderClipper(),
+                  child: Container(
+                    height: size.height * 0.4,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/uim_campus.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Logo Floating di Tengah
+                Positioned(
+                  bottom: -50,
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFB91C1C),
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 4),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          blurRadius: 15,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'U', // Simbol Logo
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 48,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            child: IntrinsicHeight(
+
+            const SizedBox(height: 80),
+
+            // --- FORM LOGIN ---
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Header with university building image
-                  Stack(
+                  const Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+
+                  // Input Email
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Email 365',
+                      labelStyle: const TextStyle(color: Color(0xFFB91C1C)),
+                      hintText: 'Enter your email',
+                      hintStyle: const TextStyle(color: Colors.grey),
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFB91C1C),
+                          width: 2,
+                        ),
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFB91C1C),
+                          width: 3,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+
+                  // Input Password
+                  TextField(
+                    obscureText: _obscureText,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      labelStyle: const TextStyle(color: Color(0xFFB91C1C)),
+                      hintText: 'Enter your password',
+                      hintStyle: const TextStyle(color: Colors.grey),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          color: Color(0xFFB91C1C),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      ),
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFB91C1C),
+                          width: 2,
+                        ),
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color(0xFFB91C1C),
+                          width: 3,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Remember Me and Forgot Password
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: double.infinity,
-                        height: MediaQuery.of(context).size.height * 0.4,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                              'https://www.telkomuniversity.ac.id/wp-content/uploads/2020/01/kampus-international-business-school-telkom-university.jpg',
-                            ),
-                            fit: BoxFit.cover,
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: false,
+                            onChanged: (bool? value) {},
+                            activeColor: const Color(0xFFB91C1C),
                           ),
-                        ),
+                          const Text(
+                            'Remember me',
+                            style: TextStyle(color: Colors.grey, fontSize: 14),
+                          ),
+                        ],
                       ),
-                      // Diagonal cut at the bottom of the header
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: ClipPath(
-                          clipper: DiagonalClipper(),
-                          child: Container(
-                            height: 60,
-                            color: Colors.transparent,
-                          ),
-                        ),
-                      ),
-                      // Red circular logo with white 'T' floating at the boundary
-                      Positioned(
-                        bottom: -40,
-                        left: MediaQuery.of(context).size.width / 2 - 40,
-                        child: Container(
-                          width: 80,
-                          height: 80,
-                          decoration: const BoxDecoration(
-                            color: Color(
-                              0xFFb91c1c,
-                            ), // Red maroon color as specified
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 10,
-                                offset: Offset(0, 5),
-                              ),
-                            ],
-                          ),
-                          child: const Center(
-                            child: Text(
-                              'T',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: Color(0xFFB91C1C),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ],
                   ),
 
-                  // White body with login form
-                  Container(
-                    margin: const EdgeInsets.only(top: 40),
+                  const SizedBox(height: 20),
+
+                  // Tombol Log In
+                  SizedBox(
                     width: double.infinity,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                    height: 55,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Navigate to dashboard screen
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => const DashboardScreen(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFB91C1C),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        elevation: 5,
                       ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const SizedBox(
-                            height: 50,
-                          ), // Space for the floating logo
-                          // Login title with large bold text
-                          Text(
-                            'Login',
-                            style: GoogleFonts.inter(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[800],
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-
-                          const SizedBox(height: 30),
-
-                          // Email input field with underlined style
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: const Color(
-                                    0xFFb91c1c,
-                                  ), // Red maroon underline
-                                  width: 2,
-                                ),
-                              ),
-                            ),
-                            child: TextField(
-                              controller: _emailController,
-                              decoration: const InputDecoration(
-                                labelText: 'Email 365',
-                                labelStyle: TextStyle(
-                                  color: Color(0xFFb91c1c), // Red maroon label
-                                  fontSize: 16,
-                                ),
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.zero,
-                              ),
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ),
-
-                          const SizedBox(height: 20),
-
-                          // Password input field with underlined style
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: const Color(
-                                    0xFFb91c1c,
-                                  ), // Red maroon underline
-                                  width: 2,
-                                ),
-                              ),
-                            ),
-                            child: TextField(
-                              controller: _passwordController,
-                              obscureText: !_passwordVisible,
-                              decoration: InputDecoration(
-                                labelText: 'Password',
-                                labelStyle: const TextStyle(
-                                  color: Color(0xFFb91c1c), // Red maroon label
-                                  fontSize: 16,
-                                ),
-                                border: InputBorder.none,
-                                contentPadding: EdgeInsets.zero,
-                                suffixIcon: IconButton(
-                                  icon: Icon(
-                                    _passwordVisible
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
-                                    color: const Color(
-                                      0xFFb91c1c,
-                                    ), // Red maroon eye icon
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      _passwordVisible = !_passwordVisible;
-                                    });
-                                  },
-                                ),
-                              ),
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ),
-
-                          const SizedBox(height: 40),
-
-                          // Login button with maroon color and pill shape
-                          Container(
-                            width: double.infinity,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: const Color(
-                                0xFFb91c1c,
-                              ), // Red maroon color
-                              borderRadius: BorderRadius.circular(
-                                25,
-                              ), // Pill-shaped
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: TextButton(
-                              onPressed: () {
-                                // Navigate to dashboard screen
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const DashboardScreen(),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                'Log In',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                      child: const Text(
+                        'Log In',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
 
-                  // Footer with red wave shape
-                  Container(
-                    height: 80,
-                    child: ClipPath(
-                      clipper: WaveClipper(),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: Color(0xFFb91c1c), // Red maroon color
-                        ),
+                  const SizedBox(height: 20),
+
+                  // Link Bantuan
+                  const Center(
+                    child: Text(
+                      'Bantuan ?',
+                      style: TextStyle(
+                        color: Color(0xFFB91C1C),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-          ),
+
+            // --- DEKORASI GELOMBANG BAWAH ---
+            Container(
+              height: 100,
+              width: double.infinity,
+              child: ClipPath(
+                clipper: FooterClipper(),
+                child: Container(color: const Color(0xFFB91C1C)),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class DiagonalClipper extends CustomClipper<Path> {
+// Clipper untuk lengkungan gambar header
+class HeaderClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    final path = Path();
-    path.lineTo(0, size.height); // Start from top left to bottom
-    path.lineTo(size.width, size.height - 20); // Bottom right with diagonal cut
-    path.lineTo(size.width, 0); // Top right
+    Path path = Path();
+    path.lineTo(0, size.height * 0.85);
+    path.cubicTo(
+      size.width * 0.2,
+      size.height * 0.8,
+      size.width * 0.4,
+      size.height * 0.9,
+      size.width * 0.5,
+      size.height * 0.8,
+    );
+    path.cubicTo(
+      size.width * 0.7,
+      size.height * 0.6,
+      size.width * 0.9,
+      size.height * 0.75,
+      size.width,
+      size.height * 0.7,
+    );
+    path.lineTo(size.width, 0);
     path.close();
     return path;
   }
@@ -295,39 +278,30 @@ class DiagonalClipper extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
 
-class WaveClipper extends CustomClipper<Path> {
+// Clipper untuk gelombang footer
+class FooterClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    final path = Path();
-    path.lineTo(0, size.height); // Start from top left to bottom
-
-    final waveHeight = 20.0; // Increased wave height for more visual impact
-    final waveLength = 50.0; // Increased wave length for smoother waves
-    double yPos = 0;
-
-    // Create multiple wave cycles across the width
-    for (double i = 0; i <= size.width; i += waveLength) {
-      // Create a wave pattern with cubic Bezier curves
-      path.cubicTo(
-        i + waveLength / 4,
-        yPos,
-        i + waveLength / 4,
-        yPos - waveHeight,
-        i + waveLength / 2,
-        yPos,
-      );
-
-      path.cubicTo(
-        i + waveLength * 3 / 4,
-        yPos + waveHeight,
-        i + waveLength * 3 / 4,
-        yPos,
-        i + waveLength,
-        yPos,
-      );
-    }
-
-    path.lineTo(size.width, 0); // Go to top right
+    Path path = Path();
+    path.lineTo(0, 0);
+    path.cubicTo(
+      size.width * 0.2,
+      size.height * 0.3,
+      size.width * 0.4,
+      0,
+      size.width * 0.5,
+      size.height * 0.2,
+    );
+    path.cubicTo(
+      size.width * 0.7,
+      size.height * 0.5,
+      size.width * 0.9,
+      0,
+      size.width,
+      size.height * 0.2,
+    );
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
     path.close();
     return path;
   }

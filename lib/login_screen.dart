@@ -232,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
 
             // --- DEKORASI GELOMBANG BAWAH ---
-            Container(
+            SizedBox(
               height: 100,
               width: double.infinity,
               child: ClipPath(

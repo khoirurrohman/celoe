@@ -8,6 +8,20 @@ class SistemCerdasScreen extends StatefulWidget {
 }
 
 class _SistemCerdasScreenState extends State<SistemCerdasScreen> {
+  late TextEditingController _promptController;
+
+  @override
+  void initState() {
+    super.initState();
+    _promptController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _promptController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,6 +160,32 @@ class _SistemCerdasScreenState extends State<SistemCerdasScreen> {
     );
   }
 
+  void _enhancePrompt() {
+    String prompt = _promptController.text.trim();
+    if (prompt.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter a prompt to enhance.')),
+      );
+      return;
+    }
+    // Simple enhancement: rephrase and add context
+    String enhanced =
+        'Enhanced Prompt: Please provide a detailed explanation of $prompt, including examples and potential applications in artificial intelligence.';
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Enhanced Prompt'),
+        content: Text(enhanced),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildCourseInfoCard(String title, String value, Color textColor) {
     return Container(
       padding: const EdgeInsets.all(12),
@@ -194,7 +234,7 @@ class _SistemCerdasScreenState extends State<SistemCerdasScreen> {
           ),
           const SizedBox(height: 10),
           // Changed from Expanded to regular ListView to prevent overflow
-          Container(
+          SizedBox(
             height: 300, // Fixed height to prevent overflow
             child: ListView.builder(
               shrinkWrap: true,
@@ -289,7 +329,7 @@ class _SistemCerdasScreenState extends State<SistemCerdasScreen> {
           ),
           const SizedBox(height: 10),
           // Changed from Expanded to regular ListView to prevent overflow
-          Container(
+          SizedBox(
             height: 300, // Fixed height to prevent overflow
             child: ListView.builder(
               shrinkWrap: true,
@@ -387,9 +427,27 @@ class _SistemCerdasScreenState extends State<SistemCerdasScreen> {
             ),
           ),
           const SizedBox(height: 10),
+          TextField(
+            controller: _promptController,
+            decoration: const InputDecoration(
+              hintText: 'Type your prompt here',
+              border: OutlineInputBorder(),
+            ),
+            maxLines: 3,
+          ),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: _enhancePrompt,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF8B0000),
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Enhance Prompt'),
+          ),
+          const SizedBox(height: 10),
           // Changed from Expanded to regular ListView to prevent overflow
-          Container(
-            height: 300, // Fixed height to prevent overflow
+          SizedBox(
+            height: 200, // Reduced height to accommodate new elements
             child: ListView.builder(
               shrinkWrap: true,
               itemCount: 3,

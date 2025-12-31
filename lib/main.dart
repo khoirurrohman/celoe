@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
+import 'dashboard_screen.dart';
 
 void main() {
   runApp(const CeLoeApp());
@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Future.delayed(const Duration(seconds: 3), () {
         if (mounted) {
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => const LoginScreen()),
+            MaterialPageRoute(builder: (context) => const DashboardScreen()),
           );
         }
       });
@@ -51,115 +51,59 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(
-        0xFFC2272D,
-      ), // Telkom University red background
+      backgroundColor: Colors.white,
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              const Color(0xFFC2272D), // Telkom University red
-              const Color(0xFFA52A2D), // Slightly darker red
-            ],
-          ),
-        ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Main Logo with enhanced styling - using the actual logo image
+              // Main Logo
               Container(
                 width: 150,
                 height: 150,
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.15),
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.3),
-                    width: 3,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.3),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(75),
-                  child: Image.asset(
-                    'assets/images/celoe_logo.png',
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) {
-                      // Fallback to default icon if image fails to load
-                      return const Icon(
-                        Icons.school,
-                        size: 80,
-                        color: Colors.white,
-                      );
-                    },
-                  ),
+                child: Image.asset(
+                  'assets/images/celoe_logo.png',
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    // Fallback to default icon if image fails to load
+                    return const Icon(
+                      Icons.school,
+                      size: 80,
+                      color: Colors.black,
+                    );
+                  },
                 ),
               ),
               const SizedBox(height: 40),
-              // App name with enhanced styling using Feremost font
+              // App name
               Text(
                 'ceLoe',
                 style: TextStyle(
                   fontSize: 56,
                   fontWeight: FontWeight.w700,
-                  color: Colors.white,
+                  color: Colors.black,
                   letterSpacing: 2,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black.withValues(alpha: 0.3),
-                      offset: const Offset(2, 2),
-                      blurRadius: 4,
-                    ),
-                  ],
                 ),
               ),
               const SizedBox(height: 12),
-              // Subtitle with enhanced styling
+              // Subtitle
               Text(
                 'Learning Management System',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
-                  color: Colors.white.withValues(alpha: 0.9),
+                  color: Colors.black.withValues(alpha: 0.7),
                   letterSpacing: 1,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black.withValues(alpha: 0.3),
-                      offset: const Offset(1, 1),
-                      blurRadius: 2,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 40),
-              // Loading indicator
-              Container(
-                width: 60,
-                height: 60,
-                padding: const EdgeInsets.all(8),
-                child: CircularProgressIndicator(
-                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-                  strokeWidth: 3,
                 ),
               ),
               const SizedBox(height: 20),
               // University branding
               Text(
-                'UNIVERSITAS ISLAM MADURA',
+                'Telkom University',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w300,
-                  color: Colors.white.withValues(alpha: 0.7),
-                  fontStyle: FontStyle.italic,
+                  color: Colors.black.withValues(alpha: 0.5),
                 ),
               ),
             ],
